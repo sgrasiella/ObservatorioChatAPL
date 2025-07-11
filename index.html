@@ -1,105 +1,130 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot Avançado com LLM</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-        #chat-container {
-            width: 400px;
-            height: 500px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            background-color: white;
-        }
-        #chat-messages {
-            flex-grow: 1;
-            overflow-y: auto;
-            padding: 10px;
-        }
-        #user-input-container {
-            display: flex;
-            padding: 10px;
-            border-top: 1px solid #ccc;
-        }
-        #user-input {
-            flex-grow: 1;
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
-        #send-button {
-            padding: 5px 10px;
-            margin-left: 5px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-        .message {
-            margin-bottom: 10px;
-            padding: 5px 10px;
-            border-radius: 5px;
-            max-width: 70%;
-        }
-        .user-message {
-            background-color: #e1ffc7;
-            align-self: flex-end;
-            margin-left: auto;
-        }
-        .bot-message {
-            background-color: #f0f0f0;
-            align-self: flex-start;
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chat Simples</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    #chat-container {
+        width: 400px;
+        height: 500px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    #messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 10px;
+        border: 1px solid #ddd;
+        margin-bottom: 10px;
+    }
+    .message {
+        margin-bottom: 10px;
+    }
+    .user {
+        text-align: right;
+        color: blue;
+    }
+    .bot {
+        text-align: left;
+        color: green;
+    }
+    #input-area {
+        display: flex;
+    }
+    #user-input {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    #send-btn {
+        padding: 8px 12px;
+        margin-left: 5px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    #send-btn:hover {
+        background-color: #45a049;
+    }
+</style>
 </head>
 <body>
-    <div id="chat-container">
-        <div id="chat-messages"></div>
-        <div id="user-input-container">
-            <input type="text" id="user-input" placeholder="Digite sua mensagem...">
-            <button id="send-button">Enviar</button>
-        </div>
+
+<div id="chat-container">
+    <div id="messages"></div>
+    <div id="input-area">
+        <input type="text" id="user-input" placeholder="Digite sua mensagem..." />
+        <button id="send-btn">Enviar</button>
     </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-        const chatMessages = document.getElementById('chat-messages');
-        const userInput = document.getElementById('user-input');
-        const sendButton = document.getElementById('send-button');
+<script>
+    const messagesDiv = document.getElementById('messages');
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
 
-        const OPENAI_API_KEY = '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'; // Substitua pela sua chave de API
-        const API_ENDPOINT = 'https://api.openai.com/v1/chat/completions';
+    // Função para adicionar mensagem ao chat
+    function addMessage(text, sender) {
+        const msg = document.createElement('div');
+        msg.classList.add('message', sender);
+        msg.innerText = text;
+        messagesDiv.appendChild(msg);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
 
-        async function sendMessage() {
-            const message = userInput.value.trim();
-            if (message) {
-                addMessage('user', message);
-                userInput.value = '';
-
-                try {
-                    const response = await getBotResponse(message);
-                    addMessage('bot', response);
-                } catch (error) {
-                    console.error('Erro ao obter resposta:', error);
-                    addMessage('bot', 'Desculpe, ocorreu um erro ao processar sua mensagem.');
-                }
-            }
+    // Resposta simples do "bot"
+    function getBotResponse(input) {
+        // Aqui você pode personalizar as respostas
+        if (input.toLowerCase().includes('olá')) {
+            return 'Olá! Como posso ajudar?';
+        } else if (input.toLowerCase().includes('tchau')) {
+            return 'Até logo!';
+        } else {
+            return 'Desculpe, ainda estou aprendendo. Pode perguntar outra coisa.';
         }
+    }
 
-        function addMessage(sender, message) {
-            const messageElement = document.createElement('div');
-            messageElement.classList.ad
+    // Evento para enviar mensagem
+    function sendMessage() {
+        const text = userInput.value.trim();
+        if (text === '') return;
+        addMessage(text, 'user');
+        userInput.value = '';
+
+        // Resposta do bot
+        const response = getBotResponse(text);
+        setTimeout(() => {
+            addMessage(response, 'bot');
+        }, 500);
+    }
+
+    // Evento de clique no botão
+    sendBtn.addEventListener('click', sendMessage);
+    // Evento de pressionar Enter
+    userInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
+
+</script>
+
+</body>
+</html>
