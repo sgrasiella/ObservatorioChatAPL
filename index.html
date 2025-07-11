@@ -75,38 +75,7 @@
         .hero p {
             font-size: 1.2rem;
             margin-bottom: 2rem;
-        }
-               
-        /* Footer */
-        footer {
-            background-color: #2f9e41;
-            color: white;
-            padding: 3rem 2rem;
-            margin-top: 5rem;
-        }
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        .footer-section h4 {
-            font-family: 'Barlow', serif;
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-        .footer-section p {
-            margin-bottom: 0.5rem;
-        }
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-        .social-links a {
-            color: white;
-            text-decoration: none;
-        }
+        }               
         /* Button Styles */
         .btn {
             display: inline-block;
@@ -127,32 +96,27 @@
             z-index: 1000;
         }
     </style>
-    
 </head>
 <body>
 
-<script
-  src="https://cdn.jsdelivr.net/gh/logspace-ai/langflow-embedded-chat@v1.0.7/dist/build/static/js/bundle.min.js">
+<script src="https://cdn.jsdelivr.net/gh/logspace-ai/langflow-embedded-chat@v1.0.7/dist/build/static/js/bundle.min.js">
 </script>
        <div class = "chat-container">
   <langflow-chat
-    window_title="CHAT APL"
+    window_title="Assistente APL"
     flow_id="ceab17db-1aca-4a81-a45d-edea49e6038e"
     host_url="https://sgrasiella-langflow-serenatto.hf.space"
-     width = "600"
+    width = "600"
     height = "440" 
-         chat_position = "top-right"
-     placeholder = "Digite sua pergunta aqui..."
-      online_message = "Online"
-      >
-</langflow-chat>
+    chat_position = "top-right"
+    placeholder = "Digite sua pergunta aqui!"
+    online_message = "Online"
+    >
+ </langflow-chat>
                               
-            </div>
+ </div>
     <header>
         <nav>
-            <a href="#" class="logo">
-                <img src="https://github.com/sgrasiella/observatorioAPLTeste/blob/main/imagens/ifmg_vertical.png?raw=true" alt="Logo IFMG">
-            </a>
             <div class="nav-links">
                 <a href="#">Home</a>
                 <a href="#">Buscas</a>
@@ -162,11 +126,6 @@
         </nav>
     </header>
 
-    <!-- Anúncio -->
-    <div class="announcement-bar">
-        <p>OBSERVATÓRIO APLs |  <strong>IFMG</strong></p>
-    </div>
-
     <section class="hero">
         <div class="hero-content">
             <h1>Observatório</h1>
@@ -174,30 +133,6 @@
             <a href="#produtos" class="btn">Explorar informações</a>
         </div>
     </section>
-
-
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Sobre nós</h4>
-                <p>O Observatório dos APLs - IFMG é um projeto do Instituto Federal de Educação, Ciência e Tecnologia de Minas Gerais</p>
-            </div>
-            <div class="footer-section">
-                <h4>Contato</h4>
-                <p>Email: contato@apl.br</p>
-                <p>Telefone: (11) 99999-9999</p>
-            </div>
-            <div class="footer-section">
-                <h4>Siga-nos</h4>
-                <div class="social-links">
-                    <a href="#">Instagram</a>
-                    <a href="#">Facebook</a>
-                    <a href="#">Xxx</a>
-                </div>
-            </div>
-        </div>
-    </footer>
 </body>
 </html>
 
